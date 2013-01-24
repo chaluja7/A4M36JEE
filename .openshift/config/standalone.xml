@@ -33,9 +33,9 @@
         <extension module="org.jboss.as.webservices"/>
         <extension module="org.jboss.as.weld"/>
     </extensions>
-    
+
     <system-properties>
-       <property name="org.apache.coyote.http11.Http11Protocol.COMPRESSION" value="on"/>
+        <property name="org.apache.coyote.http11.Http11Protocol.COMPRESSION" value="on"/>
     </system-properties>
 
     <management>
@@ -104,23 +104,23 @@
                     <connection-url>jdbc:mysql://localhost:3306/flightsystem</connection-url>
                     <driver>mysql</driver>
                     <security>
-                      <user-name>username</user-name>
-                      <password>password</password>
+                        <user-name>username</user-name>
+                        <password>password</password>
                     </security>
                     <validation>
-                      <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
-                	</validation>
+                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+                    </validation>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/PostgreSQLDS" enabled="false" use-java-context="true" pool-name="PostgreSQLDS" use-ccm="true">
                     <connection-url>jdbc:postgresql://${env.OPENSHIFT_POSTGRESQL_DB_HOST}:${env.OPENSHIFT_POSTGRESQL_DB_PORT}/flightsystem</connection-url>
                     <driver>postgresql</driver>
                     <security>
-                      <user-name>${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}</user-name>
-                      <password>${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}</password>
+                        <user-name>${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}</user-name>
+                        <password>${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}</password>
                     </security>
                     <validation>
-                      <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
-                	</validation>
+                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+                    </validation>
                 </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
@@ -132,7 +132,7 @@
                     <driver name="postgresql" module="org.postgresql.jdbc">
                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
                     </driver>
-		            <driver name="postgresql-driver" module="org.postgresql">
+                    <driver name="postgresql-driver" module="org.postgresql">
                         <driver-class>org.postgresql.Driver</driver-class>
                     </driver>
                 </drivers>
@@ -233,7 +233,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jacorb:1.1">
             <orb>
-            	<initializers transactions="spec" security="on"/>
+                <initializers transactions="spec" security="on"/>
             </orb>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jaxr:1.0">
@@ -246,15 +246,15 @@
             <bean-validation enabled="false"/>
             <default-workmanager>
                 <short-running-threads>
-                        <core-threads count="10"/>
-                        <queue-length count="10" />
-                        <max-threads count="10" />
+                    <core-threads count="10"/>
+                    <queue-length count="10" />
+                    <max-threads count="10" />
                     <keepalive-time time="10" unit="seconds"/>
                 </short-running-threads>
                 <long-running-threads>
-                        <core-threads count="10"/>
-                        <queue-length count="10" />
-                        <max-threads count="10" />
+                    <core-threads count="10"/>
+                    <queue-length count="10" />
+                    <max-threads count="10" />
                     <keepalive-time time="10" unit="seconds"/>
                 </long-running-threads>
             </default-workmanager>
@@ -262,17 +262,17 @@
         <subsystem xmlns="urn:jboss:domain:jdr:1.0"/>
         <subsystem xmlns="urn:jboss:domain:jgroups:1.0" default-stack="tcp">
             <stack name="tcp">
-                <transport type="TCP" socket-binding="jgroups-tcp"> 
-                	<property name="external_addr">flightsystem-ctu.rhcloud.com</property>
+                <transport type="TCP" socket-binding="jgroups-tcp">
+                    <property name="external_addr">flightsystem-ctu.rhcloud.com</property>
                     <property name="external_port">7600</property>
                     <property name="bind_port">7600</property>
                     <property name="bind_addr">127.12.65.129</property>
                 </transport>
                 <protocol type="TCPPING">
-                	<property name="timeout">30000</property>
-                	<property name="initial_hosts">127.12.65.129[7600]</property>
-                	<property name="port_range">0</property>
-                	<property name="num_initial_members">1</property>
+                    <property name="timeout">30000</property>
+                    <property name="initial_hosts">127.12.65.129[7600]</property>
+                    <property name="port_range">0</property>
+                    <property name="num_initial_members">1</property>
                 </protocol>
                 <protocol type="MERGE2"/>
                 <protocol type="FD"/>
@@ -282,14 +282,14 @@
                 <protocol type="UNICAST2"/>
                 <protocol type="pbcast.STABLE"/>
                 <protocol type="AUTH">
-                        <property name="auth_class">org.jgroups.auth.MD5Token</property>
-                        <property name="token_hash">SHA</property>
-                        <property name="auth_value">4aa31b67dfb84ff1b2895bae7f1c005a</property>
+                    <property name="auth_class">org.jgroups.auth.MD5Token</property>
+                    <property name="token_hash">SHA</property>
+                    <property name="auth_value">4aa31b67dfb84ff1b2895bae7f1c005a</property>
                 </protocol>
                 <protocol type="pbcast.GMS"/>
                 <protocol type="UFC"/>
                 <protocol type="MFC"/>
-                <protocol type="FRAG2"/>  
+                <protocol type="FRAG2"/>
                 <!--protocol type="pbcast.STATE_TRANSFER"/>
                 <protocol type="pbcast.FLUSH"/-->
             </stack>
@@ -470,16 +470,16 @@
                         </login-module>
                     </authentication>
                 </security-domain>
-        
-		<security-domain name="FlightSystem-policy" cache-type="default">
-		        <authentication>
-		              <login-module code="UsersRoles" flag="required">
-		                  <module-option name="usersProperties" value="${jboss.server.config.dir}/users.properties"/>
-		                  <module-option name="rolesProperties" value="${jboss.server.config.dir}/roles.properties"/>
-		              </login-module>
-		       </authentication>
-		</security-domain>    
-	</security-domains>
+
+                <security-domain name="FlightSystem-policy" cache-type="default">
+                    <authentication>
+                        <login-module code="UsersRoles" flag="required">
+                            <module-option name="usersProperties" value="${jboss.server.config.dir}/users.properties"/>
+                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/roles.properties"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+            </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
         <subsystem xmlns="urn:jboss:domain:transactions:1.1">
@@ -542,5 +542,3 @@
         </outbound-socket-binding>
     </socket-binding-group>
 </server>
-
-  .openshift/action_hooks/build .openshift/action_hooks/deploy  .openshift/action_hooks/post_deploy .openshift/action_hooks/pre_build .openshift/cron/README.cron .openshift/cron/daily/.gitignore .openshift/cron/hourly/.gitignore .openshift/cron/minutely/.gitignore .openshift/cron/monthly/.gitignore .openshift/cron/weekly/README .openshift/cron/weekly/chrono.dat .openshift/cron/weekly/chronograph .openshift/cron/weekly/jobs.allow  .openshift/cron/weekly/jobs.deny .openshift/markers/README
