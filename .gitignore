@@ -4,3 +4,5 @@ target/
 .idea/dataSources*
 .idea/libraries/
 rebel.xml
+deployments/
+.DS_Store
