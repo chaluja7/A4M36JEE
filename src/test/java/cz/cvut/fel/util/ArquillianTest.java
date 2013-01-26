@@ -48,10 +48,18 @@ public class ArquillianTest extends Arquillian {
                     .addAsResource( "test-persistence.xml", "META-INF/persistence.xml" )
                             // define the data-source with testing database
                     .addAsWebInfResource( "jboss-test-ds.xml", "jboss-test-ds.xml" )
+                            // define the web-service configuration and security for server
+                    .addAsWebInfResource( "jboss-wsse-server.xml", "jboss-wsse-server.xml" )
+                            // define the web-service configration and security for client
+                    .addAsResource( "jboss-wsse-client.xml", "jboss-wsse-client.xml" )
+                            // set security domain description
+                    .addAsWebInfResource( "jboss-web.xml", "jboss-web.xml" )
                             // define the unnecessary configuration
                     .addAsWebInfResource( EmptyAsset.INSTANCE, "beans.xml" )
                             // logging configuration
                     .addAsResource( "log4j.xml", "log4j.xml" )
+                            // describe required core dependencies
+                    .addAsManifestResource( "MANIFEST.MF" )
                             // add all classes in the project
                     .addPackages( true, "cz.cvut.fel" )
                             // required libraries
