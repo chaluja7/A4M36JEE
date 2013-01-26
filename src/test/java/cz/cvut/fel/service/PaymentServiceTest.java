@@ -151,7 +151,7 @@ public class PaymentServiceTest extends ArquillianTest {
         service.returnMoney( reservationId, PASSWORD, 123654789, 123 );
     }
 
-    //    @Test( dependsOnMethods = "testPayVisa" )
+    @Test( dependsOnMethods = "testPayVisa" )
     public void testPrintConfirmation() throws Exception {
         testPayVisa();
 

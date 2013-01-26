@@ -388,16 +388,8 @@
                 </plugins>
             </build>
 
-            <!--<distributionManagement>
-                <repository>
-                    <id>FakeRepository</id>
-                    <name>Fake Repository</name>
-                    <url>file://${project.build.directory}</url>
-                    <layout>default</layout>
-                </repository>
-            </distributionManagement> -->
-
         </profile>
+
     </profiles>
 
     <build>
