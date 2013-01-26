@@ -8,12 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * <p></p>
- *
- * @author Karel Cemus
- */
-@WebServlet( name = "LogoutServlet", urlPatterns = { "/logout.xhtml", "/logout.jsf" } )
+/** @author Karel Cemus */
+@WebServlet( name = "LogoutServlet", urlPatterns = { "/faces/logout.xhtml", "/logout.xhtml", "/logout.jsf" } )
 public class LogoutServlet extends HttpServlet {
 
     @Override

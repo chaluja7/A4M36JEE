@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /** @author Karel Cemus */
-@WebServlet( name = "LoginServlet", urlPatterns = { "/faces/login.xhtml", "/login.xhtml", "/login.jsf" } )
-public class LoginServlet extends HttpServlet {
+@WebServlet( name = "WelcomeServlet", urlPatterns = { "/faces/welcome.xhtml", "/welcome.xhtml" } )
+public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void service( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 
-        // Redirects back to the initial page.
-        response.sendRedirect( request.getContextPath() );
+        // Redirect to the initial page.
+        response.sendRedirect( request.getContextPath() + "/faces/flights.xhtml" );
     }
 }

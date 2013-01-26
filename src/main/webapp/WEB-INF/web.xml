@@ -49,7 +49,7 @@
 
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>/flights.xhtml</welcome-file>
+        <welcome-file>faces/welcome.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF mapping -->
@@ -62,12 +62,7 @@
     <!-- Map these files with JSF -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -77,7 +72,7 @@
 
     <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
-        <location>/flights.xhtml</location>
+        <location>/faces/flights.xhtml</location>
     </error-page>
 
     <mime-mapping>
@@ -90,8 +85,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>WebSecurityBasic</realm-name>
         <form-login-config>
-            <form-login-page>/login-form.xhtml</form-login-page>
-            <form-error-page>/login-form.xhtml</form-error-page>
+            <form-login-page>/faces/login-form.xhtml</form-login-page>
+            <form-error-page>/faces/login-form.xhtml</form-error-page>
         </form-login-config>
     </login-config>
 
@@ -103,16 +98,33 @@
         <role-name>admin</role-name>
     </security-role>
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>source-files</web-resource-name>
+            <description/>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>none has an access</description>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>common-unsecured-view</web-resource-name>
+            <description/>
+            <url-pattern>/faces/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
 
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>login</web-resource-name>
             <description/>
-            <url-pattern>/login.jsf</url-pattern>
-            <url-pattern>/login.xhtml</url-pattern>
+            <url-pattern>/faces/login.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <description/>
+            <description>Everyone logged in has an access</description>
             <role-name>*</role-name>
         </auth-constraint>
     </security-constraint>
@@ -121,10 +133,8 @@
         <web-resource-collection>
             <web-resource-name>destination</web-resource-name>
             <description/>
-            <url-pattern>/destination.jsf</url-pattern>
-            <url-pattern>/destination.xhtml</url-pattern>
-            <url-pattern>/destinations.jsf</url-pattern>
-            <url-pattern>/destinations.xhtml</url-pattern>
+            <url-pattern>/faces/destination.xhtml</url-pattern>
+            <url-pattern>/faces/destinations.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -136,8 +146,7 @@
         <web-resource-collection>
             <web-resource-name>flight</web-resource-name>
             <description/>
-            <url-pattern>/flight.jsf</url-pattern>
-            <url-pattern>/flight.xhtml</url-pattern>
+            <url-pattern>/faces/flight.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -148,22 +157,22 @@
 
     <error-page>
         <error-code>403</error-code>
-        <location>/403.xhtml</location>
+        <location>/faces/403.xhtml</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/404.xhtml</location>
+        <location>/faces/404.xhtml</location>
     </error-page>
 
     <error-page>
         <exception-type>com.sun.faces.context.FacesFileNotFoundException</exception-type>
-        <location>/404.xhtml</location>
+        <location>/faces/404.xhtml</location>
     </error-page>
 
     <error-page>
         <error-code>500</error-code>
-        <location>/500.xhtml</location>
+        <location>/faces/500.xhtml</location>
     </error-page>
 
 </web-app>
