@@ -107,4 +107,10 @@ public class DateUtils {
             return base;
         }
     }
+
+    private static final SimpleDateFormat STANDARD_DATE_FORMATTER = new SimpleDateFormat( "dd.MM.yyyy HH:mm" );
+
+    public static String toStandardFormat( final Date date ) {
+        return STANDARD_DATE_FORMATTER.format( date );
+    }
 }
