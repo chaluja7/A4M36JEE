@@ -156,6 +156,7 @@ public class Flight implements Serializable {
     }
 
     /** determines whether this flight is available for booking */
+    @Transient
     public boolean isBookable() {
         // deleted
         if ( validUntil.getTime() < new Date().getTime() ) return false;
@@ -170,5 +171,10 @@ public class Flight implements Serializable {
     @Transient
     public int getCapacityLeft() {
         return capacity - seatsTaken;
+    }
+
+    @Transient
+    public boolean isValid() {
+        return validUntil.getTime() >= new Date().getTime();
     }
 }

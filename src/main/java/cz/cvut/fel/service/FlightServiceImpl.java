@@ -69,7 +69,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    @RolesAllowed( { "admin", "flight-manager" } )
+    @RolesAllowed( { "admin", "flight-manager", "webservice" } )
     public Flight save( @Valid final Flight flight ) {
 
         // verify and validate entity
