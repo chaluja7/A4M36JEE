@@ -20,7 +20,7 @@ import static org.testng.Assert.*;
 public class UpdateServiceTest extends AuthorizedTest {
 
     /** The path of the WSDL endpoint in relation to the deployed web application. */
-    private static final String WSDL_PATH = "http://localhost:8080/FlightSystem/UpdateService?wsdl";
+    private static final String WSDL_PATH = "http://localhost:8080/FlightSystem/ws/update?wsdl";
 
     /** used flight number */
     private static final String FLIGHT = "F987687";

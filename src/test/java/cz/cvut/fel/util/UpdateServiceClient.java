@@ -22,7 +22,7 @@ public class UpdateServiceClient implements UpdateService {
      * @param wsdlUrl The URL to the Hello World WSDL endpoint.
      */
     public UpdateServiceClient( final URL wsdlUrl ) {
-        QName serviceName = new QName( "http://fel.cvut.cz/FlightSystem/Update", "UpdateService" );
+        QName serviceName = new QName( "http://fel.cvut.cz/FlightSystem/ws/update", "UpdateService" );
 
         Service service = Service.create( wsdlUrl, serviceName );
         this.service = service.getPort( UpdateService.class );

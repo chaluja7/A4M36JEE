@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Karel Cemus
  */
-@WebService( targetNamespace = "http://fel.cvut.cz/FlightSystem/Update" )
+@WebService( targetNamespace = "http://fel.cvut.cz/FlightSystem/ws/update" )
 public interface UpdateService {
 
     @WebMethod
