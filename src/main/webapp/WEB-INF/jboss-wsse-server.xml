@@ -6,7 +6,8 @@
     <config>
         <requires/>
         <authorize>
-            <role>admin</role>
+            <!-- WebMethods can execute only users with 'webservice' role -->
+            <role>webservice</role>
         </authorize>
     </config>
 
