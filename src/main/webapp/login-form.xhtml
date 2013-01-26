@@ -12,8 +12,9 @@
 
         <form method="post" action="j_security_check">
 
-            <h:panelGroup rendered="#{requestScope['javax.servlet.forward.servlet_path'] == '/j_security_check'}" layout="block" styleClass="messages">
-                <p class="alert alert-error"><h:outputText value="Unknown login, please try again" /></p>
+            <h:panelGroup rendered="#{requestScope['javax.servlet.forward.servlet_path'] == '/j_security_check'}" layout="block"
+                          styleClass="messages">
+                <p class="alert alert-error"><h:outputText value="Unknown login, please try again"/></p>
             </h:panelGroup>
 
             <h:panelGrid columns="3" columnClasses="left,right,messages error control-group" styleClass="edit">

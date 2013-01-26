@@ -2,7 +2,6 @@ package cz.cvut.fel.rest;
 
 import cz.cvut.fel.dto.FlightDTO;
 import cz.cvut.fel.service.FlightService;
-import lombok.Setter;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

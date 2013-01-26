@@ -11,19 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Enables messages to be rendered on different pages from which they were set.
- * <p/>
- * After each phase where messages may be added, this moves the messages from the page-scoped FacesContext to the session-scoped
- * session map.
- * <p/>
- * Before messages are rendered, this moves the messages from the session-scoped session map back to the page-scoped
- * FacesContext.
- * <p/>
- * Only global messages, not associated with a particular component, are moved. Component messages cannot be rendered on pages
- * other than the one on which they were added.
- * <p/>
- * To enable multi-page messages support, add a <code>lifecycle</code> block to your faces-config.xml file. That block should
- * contain a single <code>phase-listener</code> block containing the fully-qualified classname of this file.
+ * Enables messages to be rendered on different pages from which they were set. <p/> After each phase where messages may be added,
+ * this moves the messages from the page-scoped FacesContext to the session-scoped session map. <p/> Before messages are rendered,
+ * this moves the messages from the session-scoped session map back to the page-scoped FacesContext. <p/> Only global messages,
+ * not associated with a particular component, are moved. Component messages cannot be rendered on pages other than the one on
+ * which they were added. <p/> To enable multi-page messages support, add a <code>lifecycle</code> block to your faces-config.xml
+ * file. That block should contain a single <code>phase-listener</code> block containing the fully-qualified classname of this
+ * file.
  *
  * @author Jesse Wilson jesse[AT]odel.on.ca
  * @author Lincoln Baxter III lincoln[AT]ocpsoft.com
