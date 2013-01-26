@@ -5,9 +5,6 @@ import cz.cvut.fel.model.Flight;
 import cz.cvut.fel.model.FlightStatus;
 import cz.cvut.fel.model.Time;
 import cz.cvut.fel.util.AuthorizedTest;
-import org.jboss.security.client.SecurityClient;
-import org.jboss.security.client.SecurityClientFactory;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,12 +30,6 @@ public class FlightServiceTest extends AuthorizedTest {
 
     @Inject
     private DestinationService destinationService;
-
-    @AfterGroups( groups = { "user-flight-manager", "user-admin" } )
-    public void logout() throws Exception {
-        final SecurityClient securityClient = SecurityClientFactory.getSecurityClient();
-        securityClient.logout();
-    }
 
     @AfterMethod
     public void cleanUp() throws Exception {

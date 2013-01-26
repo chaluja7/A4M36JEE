@@ -5,9 +5,6 @@ import cz.cvut.fel.exception.NoSuchDestinationException;
 import cz.cvut.fel.model.Destination;
 import cz.cvut.fel.util.AuthorizedTest;
 import lombok.extern.slf4j.Slf4j;
-import org.jboss.security.client.SecurityClient;
-import org.jboss.security.client.SecurityClientFactory;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -37,12 +34,6 @@ public class DestinationServiceTest extends AuthorizedTest {
             transaction.commit();
         }
 
-    }
-
-    @AfterGroups( groups = { "user-flight-manager", "user-admin" } )
-    public void logout() throws Exception {
-        final SecurityClient securityClient = SecurityClientFactory.getSecurityClient();
-        securityClient.logout();
     }
 
     @Test( dataProvider = "findByCodeProvider", groups = "user-unlogged" )
