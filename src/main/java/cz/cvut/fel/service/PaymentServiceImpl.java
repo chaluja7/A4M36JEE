@@ -4,12 +4,12 @@ import cz.cvut.fel.exception.InvalidPaymentException;
 import cz.cvut.fel.exception.NoSuchReservationException;
 import cz.cvut.fel.model.Payment;
 import cz.cvut.fel.model.Reservation;
+import cz.cvut.fel.utils.FlightSystemDatabase;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +19,8 @@ import java.util.List;
 @Stateless
 public class PaymentServiceImpl implements PaymentService {
 
-    @PersistenceContext
+    @Inject
+    @FlightSystemDatabase
     private EntityManager em;
 
     @Inject

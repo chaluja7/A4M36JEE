@@ -1,5 +1,6 @@
 package cz.cvut.fel.util;
 
+import cz.cvut.fel.utils.FlightSystemDatabase;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -10,8 +11,8 @@ import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
@@ -24,7 +25,8 @@ public class ArquillianTest extends Arquillian {
     /** determines whether the class is run inside of the container. suppose true */
     private static boolean inContainer = true;
 
-    @PersistenceContext
+    @Inject
+    @FlightSystemDatabase
     protected EntityManager em;
 
     @Resource

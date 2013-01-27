@@ -2,14 +2,15 @@ package cz.cvut.fel.service;
 
 import cz.cvut.fel.exception.NoSuchFlightException;
 import cz.cvut.fel.model.Flight;
+import cz.cvut.fel.utils.FlightSystemDatabase;
 import lombok.extern.slf4j.Slf4j;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,8 @@ import java.util.List;
 @SecurityDomain( "FlightSystem-policy" )
 public class FlightServiceImpl implements FlightService {
 
-    @PersistenceContext
+    @Inject
+    @FlightSystemDatabase
     private EntityManager em;
 
     @Override

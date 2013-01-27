@@ -3,13 +3,13 @@ package cz.cvut.fel.service;
 import cz.cvut.fel.exception.*;
 import cz.cvut.fel.model.Flight;
 import cz.cvut.fel.model.Reservation;
+import cz.cvut.fel.utils.FlightSystemDatabase;
 import cz.cvut.fel.utils.SecurityProvider;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 
 /** @author Karel Cemus */
@@ -17,7 +17,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class ReservationServiceImpl implements ReservationService {
 
-    @PersistenceContext
+    @Inject
+    @FlightSystemDatabase
     private EntityManager em;
 
     @Inject
