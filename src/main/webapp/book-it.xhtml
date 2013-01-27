@@ -97,7 +97,7 @@
                         <h:commandButton value="Save" action="#{bookBean.book}" styleClass="btn btn-primary">
                             <f:ajax execute="@form" render="@all"/>
                         </h:commandButton>
-                        <h:commandButton value="Cancel" action="flights?includeViewParams=true"
+                        <h:commandButton value="Cancel" action="flights?faces-redirect=true&amp;includeViewParams=true"
                                          styleClass="btn btn-inverse" immediate="true"/>
                     </h:panelGroup>
                     <h:outputText/>

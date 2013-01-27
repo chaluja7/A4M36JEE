@@ -1,12 +1,13 @@
 package cz.cvut.fel.util;
 
+import cz.cvut.fel.utils.FlightSystemDatabase;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
@@ -16,7 +17,8 @@ import javax.transaction.UserTransaction;
  */
 public class DatabaseTest extends ArquillianTest {
 
-    @PersistenceContext
+    @Inject
+    @FlightSystemDatabase
     protected EntityManager em;
 
     @Resource

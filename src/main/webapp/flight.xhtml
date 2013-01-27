@@ -120,7 +120,7 @@
                     <h:commandButton value="Save" action="#{flight.save}" styleClass="btn btn-primary">
                         <f:ajax execute="@form" render="@all"/>
                     </h:commandButton>
-                    <h:commandButton value="Cancel" action="flights?includeViewParams=true" immediate="true"
+                    <h:commandButton value="Cancel" action="flights?faces-redirect=true&amp;includeViewParams=true" immediate="true"
                                      styleClass="btn btn-inverse"/>
                 </h:panelGroup>
                 <h:outputText/>
