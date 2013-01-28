@@ -99,11 +99,12 @@
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method>
-      <option name="BuildArtifacts" enabled="true">
+      <option name="BuildArtifacts" enabled="false">
         <artifact name="FlightSystem:war" />
         <artifact name="FlightSystem:war exploded" />
       </option>
-      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="compile" />
+      <option name="Make" enabled="false" />
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
     </method>
   </configuration>
 </component>

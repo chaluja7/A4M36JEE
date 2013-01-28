@@ -170,7 +170,7 @@
             <!-- profile with all libraries needed for tests -->
             <id>testing</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
 
             <dependencies>
