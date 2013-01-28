@@ -9,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
+import org.jboss.ejb3.annotation.Clustered;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ import java.util.TimeZone;
 
 /** @author Karel Cemus */
 @Setter
+@Clustered
 @SessionScoped
 @Named( "reservationBean" )
 public class ReservationBean extends BeanBase implements Serializable {

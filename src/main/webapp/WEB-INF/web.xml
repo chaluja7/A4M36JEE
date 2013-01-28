@@ -175,4 +175,6 @@
         <location>/faces/500.xhtml</location>
     </error-page>
 
+    <distributable/>
+
 </web-app>

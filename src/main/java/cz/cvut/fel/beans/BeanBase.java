@@ -7,9 +7,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * <p>Base class for beans providing comfort functionality</p>
@@ -91,6 +94,13 @@ public class BeanBase implements Serializable {
     public void init() {
 
         // init session, solution for uninitialized context exception, this is a bit hack, multiple rich:calendar caused an issue
-        FacesContext.getCurrentInstance().getExternalContext().getSession( true );
+        HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
+        Object id = session.getAttribute( "cz.cvut.fel.session-id" );
+        if ( id == null ) {
+            id = "Session created at " + new SimpleDateFormat( "dd.MM.yyyy HH:mm" ).format( new Date() );
+            session.setAttribute( "cz.cvut.fel.session-id", id );
+        }
+        System.out.println( id );
+
     }
 }

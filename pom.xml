@@ -138,13 +138,31 @@
         <dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces</artifactId>
-            <version>3.0.2.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.seam.international</groupId>
-                    <artifactId>seam-international</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>3.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.seam.persistence</groupId>
+            <artifactId>seam-persistence</artifactId>
+            <version>3.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.seam.security</groupId>
+            <artifactId>seam-security</artifactId>
+            <version>3.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>5.4.0.Final</version>
         </dependency>
 
         <dependency>
@@ -324,7 +342,8 @@
                         <configuration>
                             <skipTests>false</skipTests>
                             <additionalClasspathElements>
-                                <additionalClasspathElement>${project.basedir}/src/main/webapp/WEB-INF/</additionalClasspathElement>
+                                <additionalClasspathElement>${project.basedir}/src/main/webapp/WEB-INF/
+                                </additionalClasspathElement>
                             </additionalClasspathElements>
                         </configuration>
                     </plugin>
@@ -439,7 +458,9 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Dependencies>org.jboss.ws.native.jbossws-native-core com.google.guava</Dependencies>
+                            <Dependencies>org.jboss.ws.native.jbossws-native-core, org.jboss.logging, org.apache.log4j, org.slf4j,
+                                com.google.guava, com.sun.jsf-impl
+                            </Dependencies>
                         </manifestEntries>
                     </archive>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
