@@ -136,36 +136,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.seam.faces</groupId>
-            <artifactId>seam-faces</artifactId>
-            <version>3.1.0.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.seam.persistence</groupId>
-            <artifactId>seam-persistence</artifactId>
-            <version>3.1.0.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.seam.security</groupId>
-            <artifactId>seam-security</artifactId>
-            <version>3.1.0.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.drools</groupId>
-            <artifactId>drools-core</artifactId>
-            <version>5.4.0.Final</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>13.0</version>
