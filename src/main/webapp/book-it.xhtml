@@ -12,7 +12,7 @@
 
         <f:metadata>
 
-            <f:viewParam name="flight" value="#{bookBean.flight}" converter="flightConverter" required="true"
+            <f:viewParam name="flight" value="#{bookBean.flight}" converter="#{flightConverter}" required="true"
                          requiredMessage="Flight number is required." converterMessage="Flight doesn't exist."/>
 
             <f:viewParam name="date-from" value="#{overviewConfiguration.dateFrom}"

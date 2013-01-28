@@ -4,17 +4,19 @@ import cz.cvut.fel.beans.BeanBase;
 import cz.cvut.fel.model.Destination;
 import cz.cvut.fel.service.DestinationService;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 
 /** @author Karel Cemus */
-@FacesConverter( "destinationConverter" )
+@ApplicationScoped
+@Named( "destinationConverter" )
 public class DestinationConverter extends BeanBase implements Converter, Serializable {
 
     @Inject

@@ -12,7 +12,7 @@
 
         <f:metadata>
 
-            <f:viewParam name="number" value="#{flight.flight}" converter="flightConverter"
+            <f:viewParam name="number" value="#{flight.flight}" converter="#{flightConverter}"
                          converterMessage="Flight doesn't exist."/>
 
             <f:viewParam name="date-from" value="#{overviewConfiguration.dateFrom}"
@@ -73,22 +73,18 @@
                 <h:message for="arrival-actual" styleClass="help-inline"/>
 
                 <h:outputLabel for="from" value="Departure from"/>
-                <h:selectOneMenu id="from" value="#{flight.flight.from}" styleClass="input-large">
+                <h:selectOneMenu id="from" value="#{flight.flight.from}" styleClass="input-large" converter="#{destinationConverter}">
                     <f:selectItem value="#{null}" itemLabel="- undefined -"/>
                     <f:selectItems value="#{destinations.destinations}" var="item" itemLabel="#{item.name}"
                                    itemValue="#{item}"/>
-                    <rich:validator/>
-                    <f:converter converterId="destinationConverter"/>
                 </h:selectOneMenu>
                 <h:message for="from" styleClass="help-inline"/>
 
                 <h:outputLabel for="to" value="Arrival to"/>
-                <h:selectOneMenu id="to" value="#{flight.flight.to}" styleClass="input-large">
+                <h:selectOneMenu id="to" value="#{flight.flight.to}" styleClass="input-large" converter="#{destinationConverter}">
                     <f:selectItem value="#{null}" itemLabel="- undefined -"/>
                     <f:selectItems value="#{destinations.destinations}" var="item" itemLabel="#{item.name}"
                                    itemValue="#{item}"/>
-                    <rich:validator/>
-                    <f:converter converterId="destinationConverter"/>
                 </h:selectOneMenu>
                 <h:message for="to" styleClass="help-inline"/>
 

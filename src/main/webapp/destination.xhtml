@@ -11,7 +11,7 @@
     <ui:define name="metadata">
 
         <f:metadata>
-            <f:viewParam name="code" value="#{destination.destination}" converter="destinationConverter"
+            <f:viewParam name="code" value="#{destination.destination}" converter="#{destinationConverter}"
                          converterMessage="Destination doesn't exist."/>
         </f:metadata>
 
