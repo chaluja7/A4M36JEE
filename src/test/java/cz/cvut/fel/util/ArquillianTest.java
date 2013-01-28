@@ -63,12 +63,7 @@ public class ArquillianTest extends Arquillian {
                             // describe required core dependencies
                     .addAsManifestResource( "MANIFEST.MF" )
                             // add all classes in the project
-                    .addPackages( true, "cz.cvut.fel" )
-                            // required libraries
-                    .addAsLibraries(
-                            resolver.artifact( "org.slf4j:slf4j-log4j12" )
-                                    .resolveAsFiles()
-                    );
+                    .addPackages( true, "cz.cvut.fel" );
         }
         return deployment;
     }

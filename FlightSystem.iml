@@ -166,7 +166,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.container:arquillian-container-test-impl-base:1.0.0.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.shrinkwrap:shrinkwrap-impl-base:1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.shrinkwrap:shrinkwrap-spi:1.0.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.protocol:arquillian-protocol-servlet:1.0.0.CR7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.protocol:arquillian-protocol-servlet:1.0.0.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.as:jboss-as-arquillian-container-remote:7.1.1.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.as:jboss-as-arquillian-common:7.1.1.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.container:arquillian-container-osgi:1.0.2.Final" level="project" />
