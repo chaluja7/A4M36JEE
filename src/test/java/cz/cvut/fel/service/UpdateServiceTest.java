@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
+import javax.xml.ws.WebServiceException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -20,7 +21,12 @@ import static org.testng.Assert.*;
 public class UpdateServiceTest extends AuthorizedTest {
 
     /** The path of the WSDL endpoint in relation to the deployed web application. */
-    private static final String WSDL_PATH = "http://localhost:8080/FlightSystem/ws/update?wsdl";
+    private static final String WSDL_PATH_LOCAL = "http://localhost:8080/FlightSystem/ws/update?wsdl";
+
+    /** remote OpenShift URL */
+    private static final String WSDL_PATH_REMOTE = "http://flightsystem-ctu.rhcloud.com/FlightSystem/ws/update?wsdl";
+
+    private static final boolean TEST_LOCAL = true;
 
     /** used flight number */
     private static final String FLIGHT = "F987687";
@@ -38,23 +44,30 @@ public class UpdateServiceTest extends AuthorizedTest {
     private FlightStatus backupStatus;
 
     @BeforeMethod( groups = { "user-admin" } )
-    public void setUpData() throws MalformedURLException {
+    public void setUpData() throws Exception {
         if ( isInContainer() ) {
 
-            // create WS client
-            client = new UpdateServiceClient( new URL( WSDL_PATH ) );
+            try {
+                // create WS client
+                client = new UpdateServiceClient( new URL( TEST_LOCAL ? WSDL_PATH_LOCAL : WSDL_PATH_REMOTE ) );
+            } catch ( Exception ex ) {
+                ex.printStackTrace();
+                throw ex;
+            }
 
             // backup data
-            Flight flight = service.find( FLIGHT );
-            backupDeparture = flight.getDeparture().getActual();
-            backupArrival = flight.getArrival().getActual();
-            backupStatus = flight.getStatus();
+            if ( TEST_LOCAL ) {
+                Flight flight = service.find( FLIGHT );
+                backupDeparture = flight.getDeparture().getActual();
+                backupArrival = flight.getArrival().getActual();
+                backupStatus = flight.getStatus();
+            }
         }
     }
 
     @AfterMethod( groups = { "user-admin" } )
     public void cleanUpData() {
-        if ( isInContainer() ) {
+        if ( isInContainer() && TEST_LOCAL ) {
 
             // restore data
             Flight flight = service.find( FLIGHT );
@@ -65,34 +78,67 @@ public class UpdateServiceTest extends AuthorizedTest {
         }
     }
 
-    @Test( expectedExceptions = Exception.class )
+    @Test
     public void testUpdate_NotLoggedIn() {
 
-        // perform test
-        client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
+        try {
+            // perform test
+            client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
+            fail( "Update is not supposed to pass." );
+        } catch ( WebServiceException ex ) {
+            Throwable inner = ex.getCause().getCause();
+            assertNotNull( inner );
+            assertTrue( inner.getMessage().contains( "[401] - Unauthorized" ) );
+        }
+    }
 
-        fail( "Update is not supposed to pass." );
+    @Test
+    public void testUpdate_WrongPassword() {
+
+        try {
+            // perform test
+            client.login( "petr", "wrong-password" );
+            client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
+
+            fail( "Update is not supposed to pass." );
+        } catch ( WebServiceException ex ) {
+            Throwable inner = ex.getCause().getCause();
+            assertNotNull( inner );
+            assertTrue( inner.getMessage().contains( "[401] - Unauthorized" ) );
+        }
     }
 
 
-    @Test( expectedExceptions = Exception.class )
+    @Test
     public void testUpdate_NotEvenAdminCan() {
 
-        // perform test
-        client.login( "karel", "cemus" );
-        client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
+        try {
+            // perform test
+            client.login( "karel", "cemus" );
+            client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
 
-        fail( "Update is not supposed to pass." );
+            fail( "Update is not supposed to pass." );
+        } catch ( WebServiceException ex ) {
+            Throwable inner = ex.getCause().getCause();
+            assertNotNull( inner );
+            assertTrue( inner.getMessage().contains( "[403] - Forbidden" ) );
+        }
     }
 
-    @Test( expectedExceptions = Exception.class )
+    @Test
     public void testUpdate_NotInRole() {
 
-        // perform test
-        client.login( "lubos", "matl" );
-        client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
+        try {
+            // perform test
+            client.login( "lubos", "matl" );
+            client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
 
-        fail( "Update is not supposed to pass." );
+            fail( "Update is not supposed to pass." );
+        } catch ( WebServiceException ex ) {
+            Throwable inner = ex.getCause().getCause();
+            assertNotNull( inner );
+            assertTrue( inner.getMessage().contains( "[403] - Forbidden" ) );
+        }
     }
 
     @Test( groups = { "user-admin" } )
@@ -102,11 +148,13 @@ public class UpdateServiceTest extends AuthorizedTest {
         client.login( "petr", "praus" );
         client.update( FLIGHT, date( 1, 2, 2014, 10, 20 ), date( 1, 2, 2014, 13, 20 ), FlightStatus.DELAYED );
 
-        // verify results
-        Flight flight = service.find( FLIGHT );
-        assertEquals( flight.getDeparture().getActual(), date( 1, 2, 2014, 10, 20 ) );
-        assertEquals( flight.getArrival().getActual(), date( 1, 2, 2014, 13, 20 ) );
-        assertEquals( flight.getStatus(), FlightStatus.DELAYED );
+        // verify results if the service is accessible
+        if ( TEST_LOCAL ) {
+            Flight flight = service.find( FLIGHT );
+            assertEquals( flight.getDeparture().getActual(), date( 1, 2, 2014, 10, 20 ) );
+            assertEquals( flight.getArrival().getActual(), date( 1, 2, 2014, 13, 20 ) );
+            assertEquals( flight.getStatus(), FlightStatus.DELAYED );
+        }
     }
 
 }

@@ -259,24 +259,6 @@
                     <scope>test</scope>
                 </dependency>
 
-                <!-- import JAX-WS JBoss Native implementation to allow to define used security policy by ws client -->
-                <dependency>
-                    <groupId>org.jboss.ws.native</groupId>
-                    <artifactId>jbossws-native-core</artifactId>
-                    <version>4.0.2.GA</version>
-                    <scope>provided</scope>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>woodstox</groupId>
-                            <artifactId>wstx-asl</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>ws-commons</groupId>
-                            <artifactId>policy</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-
             </dependencies>
 
             <dependencyManagement>
@@ -440,7 +422,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Dependencies>org.jboss.ws.native.jbossws-native-core com.google.guava</Dependencies>
+                            <Dependencies>com.google.guava</Dependencies>
                         </manifestEntries>
                     </archive>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
