@@ -74,6 +74,16 @@ public class UpdateServiceTest extends AuthorizedTest {
         fail( "Update is not supposed to pass." );
     }
 
+    @Test( expectedExceptions = Exception.class )
+    public void testUpdate_WrongPassword() {
+
+        // perform test
+        client.login( "karel", "wrong-password" );
+        client.update( FLIGHT, date( 1, 2, 2013, 10, 20 ), date( 1, 2, 2013, 13, 20 ), FlightStatus.DELAYED );
+
+        fail( "Update is not supposed to pass." );
+    }
+
 
     @Test( expectedExceptions = Exception.class )
     public void testUpdate_NotEvenAdminCan() {

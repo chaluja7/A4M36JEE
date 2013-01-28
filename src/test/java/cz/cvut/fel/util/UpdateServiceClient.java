@@ -2,7 +2,7 @@ package cz.cvut.fel.util;
 
 import cz.cvut.fel.model.FlightStatus;
 import cz.cvut.fel.webservice.UpdateService;
-import org.jboss.ws.core.StubExt;
+import org.apache.cxf.ws.security.SecurityConstants;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
@@ -27,14 +27,6 @@ public class UpdateServiceClient implements UpdateService {
         Service service = Service.create( wsdlUrl, serviceName );
         this.service = service.getPort( UpdateService.class );
 
-        // configure jboss native security - load and set security configuration for client
-        URL configuration = UpdateServiceClient.class.getClassLoader().getResource( "jboss-wsse-client.xml" );
-        assert ( configuration != null );
-
-        org.jboss.ws.core.StubExt stub = ( StubExt ) this.service;
-        stub.setSecurityConfig( configuration.toExternalForm() );
-        stub.setConfigName( "Standard WSSecurity Client" );
-
         assert ( this.service != null );
     }
 
@@ -58,5 +50,8 @@ public class UpdateServiceClient implements UpdateService {
         BindingProvider provider = ( BindingProvider ) service;
         provider.getRequestContext().put( BindingProvider.USERNAME_PROPERTY, username );
         provider.getRequestContext().put( BindingProvider.PASSWORD_PROPERTY, password );
+        provider.getRequestContext().put( SecurityConstants.USERNAME, username );
+        provider.getRequestContext().put( SecurityConstants.PASSWORD, password );
+        provider.getRequestContext().put( SecurityConstants.CALLBACK_HANDLER, "cz.cvut.fel.util.UsernamePasswordCallback" );
     }
 }

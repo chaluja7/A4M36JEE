@@ -50,10 +50,8 @@ public class ArquillianTest extends Arquillian {
                     .addAsResource( "test-persistence.xml", "META-INF/persistence.xml" )
                             // define the data-source with testing database
                     .addAsWebInfResource( "jboss-test-ds.xml", "jboss-test-ds.xml" )
-                            // define the web-service configuration and security for server
-                    .addAsWebInfResource( "jboss-wsse-server.xml", "jboss-wsse-server.xml" )
-                            // define the web-service configration and security for client
-                    .addAsResource( "jboss-wsse-client.xml", "jboss-wsse-client.xml" )
+                            // define the web-service endpoint configuration
+                    .addAsWebInfResource( "jaxws-endpoint-config.xml", "jaxws-endpoint-config.xml" )
                             // set security domain description
                     .addAsWebInfResource( "jboss-web.xml", "jboss-web.xml" )
                             // define the unnecessary configuration

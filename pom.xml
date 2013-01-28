@@ -52,6 +52,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-ejb3</artifactId>
+            <version>7.1.1.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss AS 7 -->
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
@@ -173,6 +180,35 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-core</artifactId>
+            <version>2.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-api</artifactId>
+            <version>2.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- import JAX-WS Apache CXF implementation to allow to define used security policy by ws server -->
+        <dependency>
+            <groupId>org.jboss.ws.cxf</groupId>
+            <artifactId>jbossws-cxf-server</artifactId>
+            <version>4.0.2.GA</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>apache-scout</groupId>
+                    <artifactId>scout</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <profiles>
@@ -257,24 +293,6 @@
                     <groupId>org.jboss.shrinkwrap</groupId>
                     <artifactId>shrinkwrap-spi</artifactId>
                     <scope>test</scope>
-                </dependency>
-
-                <!-- import JAX-WS JBoss Native implementation to allow to define used security policy by ws client -->
-                <dependency>
-                    <groupId>org.jboss.ws.native</groupId>
-                    <artifactId>jbossws-native-core</artifactId>
-                    <version>4.0.2.GA</version>
-                    <scope>provided</scope>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>woodstox</groupId>
-                            <artifactId>wstx-asl</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>ws-commons</groupId>
-                            <artifactId>policy</artifactId>
-                        </exclusion>
-                    </exclusions>
                 </dependency>
 
             </dependencies>
@@ -440,7 +458,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Dependencies>org.jboss.ws.native.jbossws-native-core com.google.guava</Dependencies>
+                            <Dependencies>org.apache.ws.security, org.apache.cxf.impl, com.google.guava</Dependencies>
                         </manifestEntries>
                     </archive>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
