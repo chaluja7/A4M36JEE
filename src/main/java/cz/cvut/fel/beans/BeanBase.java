@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * <p>Base class for beans providing comfort functionality</p>
@@ -95,12 +93,14 @@ public class BeanBase implements Serializable {
 
         // init session, solution for uninitialized context exception, this is a bit hack, multiple rich:calendar caused an issue
         HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
-        Object id = session.getAttribute( "cz.cvut.fel.session-id" );
-        if ( id == null ) {
-            id = "Session created at " + new SimpleDateFormat( "dd.MM.yyyy HH:mm" ).format( new Date() );
-            session.setAttribute( "cz.cvut.fel.session-id", id );
-        }
-        System.out.println( id );
+
+        // demonstration of shared session in cluster
+        // Object id = session.getAttribute( "cz.cvut.fel.session-id" );
+        // if ( id == null ) {
+        //     id = "Session created at " + new SimpleDateFormat( "dd.MM.yyyy HH:mm" ).format( new Date() ) + " random is " + ( int ) ( Math.random() * 1000 );
+        //     session.setAttribute( "cz.cvut.fel.session-id", id );
+        // }
+        // System.out.println( id );
 
     }
 }
