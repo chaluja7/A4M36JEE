@@ -3,6 +3,7 @@ package cz.cvut.fel.webservice;
 import cz.cvut.fel.model.FlightStatus;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.Date;
 
@@ -15,5 +16,10 @@ import java.util.Date;
 public interface UpdateService {
 
     @WebMethod
-    void update( String flightNumber, Date departure, Date arrival, FlightStatus status );
+    void update(
+            @WebParam( name = "flightNumber" ) String flightNumber,
+            @WebParam( name = "departure" ) Date departure,
+            @WebParam( name = "arrival" ) Date arrival,
+            @WebParam( name = "status" ) FlightStatus status
+    );
 }
