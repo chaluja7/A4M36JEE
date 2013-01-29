@@ -19,7 +19,6 @@
         <jboss.bom.version>1.0.0.Final</jboss.bom.version>
         <apache.cxf.version>2.4.2</apache.cxf.version>
         <jbossas.version>7.1.1.Final</jbossas.version>
-        <!-- změninl jsem z 1.6.6 na 1.5.5, protože mi nefungovala jboss-as-security -->
         <org.slf4j.version>1.5.6</org.slf4j.version>
         <skip-tests>true</skip-tests>
         <deployment.war-name>${project.build.finalName}</deployment.war-name>
@@ -384,9 +383,7 @@
                     <archive>
                         <manifestEntries>
                             <Dependencies>org.jboss.ws.native.jbossws-native-core, org.jboss.logging, org.apache.log4j,
-                                org.slf4j,
-                                com.google.guava, com.sun.jsf-impl
-                            </Dependencies>
+                                org.slf4j, com.google.guava, com.sun.jsf-impl</Dependencies>
                         </manifestEntries>
                     </archive>
                     <failOnMissingWebXml>false</failOnMissingWebXml>

@@ -7,8 +7,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -42,8 +40,6 @@ public class ArquillianTest extends Arquillian {
 
             // deployment is run locally
             inContainer = false;
-
-            MavenDependencyResolver resolver = DependencyResolvers.use( MavenDependencyResolver.class ).loadMetadataFromPom( "pom.xml" );
 
             deployment = ShrinkWrap.create( WebArchive.class, "web.war" )
                     // definition of persistence unit used in tests
