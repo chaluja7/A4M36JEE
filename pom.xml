@@ -21,6 +21,10 @@
         <jbossas.version>7.1.1.Final</jbossas.version>
         <!-- změninl jsem z 1.6.6 na 1.5.5, protože mi nefungovala jboss-as-security -->
         <org.slf4j.version>1.5.6</org.slf4j.version>
+        <skip-tests>true</skip-tests>
+        <deployment.war-name>${project.build.finalName}</deployment.war-name>
+        <deployment.output-directory>${project.build.directory}</deployment.output-directory>
+        <deployment.context-root>FlightSystem</deployment.context-root>
     </properties>
 
     <dependencies>
@@ -274,46 +278,9 @@
 
             </dependencyManagement>
 
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>2.3.2</version>
-                        <configuration>
-                            <source>1.6</source>
-                            <target>1.6</target>
-                            <compilerArguments>
-                                <endorseddirs>${endorsed.dir}</endorseddirs>
-                            </compilerArguments>
-                            <skip>false</skip>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>testCompile</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.12.3</version>
-                        <configuration>
-                            <skipTests>false</skipTests>
-                            <additionalClasspathElements>
-                                <additionalClasspathElement>${project.basedir}/src/main/webapp/WEB-INF/
-                                </additionalClasspathElement>
-                            </additionalClasspathElements>
-                        </configuration>
-                    </plugin>
-
-                </plugins>
-            </build>
+            <properties>
+                <skip-tests>false</skip-tests>
+            </properties>
 
         </profile>
 
@@ -355,21 +322,11 @@
             <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.1.1</version>
-                        <configuration>
-                            <outputDirectory>deployments</outputDirectory>
-                            <warName>FlightSystem</warName>
-                        </configuration>
-                    </plugin>
-
-                </plugins>
-            </build>
-
+            <properties>
+                <deployment.context-root>/</deployment.context-root>
+                <deployment.war-name>FlightSystem</deployment.war-name>
+                <deployment.output-directory>deployments</deployment.output-directory>
+            </properties>
         </profile>
 
     </profiles>
@@ -391,7 +348,7 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
-                    <skip>true</skip>
+                    <skip>${skip-tests}</skip>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -411,7 +368,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.3</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>${skip-tests}</skipTests>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${project.basedir}/src/main/webapp/WEB-INF/
+                        </additionalClasspathElement>
+                    </additionalClasspathElements>
                 </configuration>
             </plugin>
 
@@ -422,12 +383,31 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Dependencies>org.jboss.ws.native.jbossws-native-core, org.jboss.logging, org.apache.log4j, org.slf4j,
+                            <Dependencies>org.jboss.ws.native.jbossws-native-core, org.jboss.logging, org.apache.log4j,
+                                org.slf4j,
                                 com.google.guava, com.sun.jsf-impl
                             </Dependencies>
                         </manifestEntries>
                     </archive>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>false</filtering>
+                            <excludes>
+                                <exclude>**/*.xml</exclude>
+                            </excludes>
+                        </resource>
+                    </webResources>
+                    <outputDirectory>${deployment.output-directory}</outputDirectory>
+                    <warName>${deployment.war-name}</warName>
                 </configuration>
             </plugin>
 
