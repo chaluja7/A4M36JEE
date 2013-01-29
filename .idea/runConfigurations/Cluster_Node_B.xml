@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Cluster Node B" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss WS Native">
+  <configuration default="false" name="Cluster Node B" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss 7.1.1.Final">
     <option name="OPEN_IN_BROWSER" value="false" />
     <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
     <option name="UPDATING_POLICY" value="restart-server" />
