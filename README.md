@@ -29,14 +29,23 @@ Pro předmět A4M36JEE byl realizován jednoduchý systém pro správu letů a o
 
 
 ## Architektura a nasazení
-![Datový model](blob/master/doc/DB.png)
+
+### Datový model
+
+![Datový model](A4M36JEE/raw/master/doc/DB.png)
+
+
+### Architektura
 
 Architektura aplikace je založena na standardní třívrstvé architektuře JEE aplikací. Business objekty slouží jako datová vrstva, business vrstva se skládá ze @Stateless služeb poskytujících vlastní funkcionalitu podle anti-patternu Transaction script a prezentační vrstva je tvořena 3 klienty, jedním pro každou z technologií JSF, JAX-RS a JAX-WS.
-![Architektura aplikace](blob/master/doc/Architektura.png)
+![Architektura aplikace](A4M36JEE/raw/master/doc/Architecture.png)
+
+
+### Diagram nasazení
 
 Diagram nasazení zobrazuje nasazení aplikace na standalone JBoss AS a zachycuje i očekávané připojení klientů. Diagram nasazení by bylo možné rozšířit na nasazení do clusteru přidáním load balanceru v podobě reverzní proxy a více instancí JBoss AS.
 
-![Diagram nasazení](blob/master/doc/deployment.png)
+![Diagram nasazení](A4M36JEE/raw/master/doc/deployment.png)
 
 
 ## Testování
@@ -85,7 +94,7 @@ Tento produkt není možné spouštět v clusteru kvůli dvěma bugům, které j
 Ačkoliv několik tutoriálů a oficiální dokumentace říkají, že SingleSignOn je ve výchozí konfiguraci JBoss AS 7 zapnuté, tak se nám nepodařilo SSO zprovoznit, což lze snadno ověřit na odkazované aplikaci. Bez předávání aktuálního uživatelova oprávnění nemá smysl nasazovat aplikaci do clusteru, protože by se musel znovu přihlašovat na každý server a mohl by tak ztratit část své práce.
 
 
-Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití CDI rozšíření a jejím převodu na CDI context. Z důvodu neserializovatelnosti org.jboss.weld.bean.ManagedBean generuje Infinispan desítky výjimek každou vteřinu. Jedná se o výjimky několika typů z nichž všechny mají tu společnou příčinu. To způsobuje nestabilitu a sekání všech serverů v clusteru společně se ztrátou kontextu spravovaných bean. Tento bug již byl reportován [zde jako WELD-927](https://issues.jboss.org/browse/WELD-927) a na [JBoss fóru](https://community.jboss.org/message/754900). Naše aplikace silně využívá `@ViewScoped` bean, a to je hlavní příčina toho, proč ji není možné nasadit do clusteru.
+Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití CDI rozšíření a jejím převodu na CDI context. Z důvodu neserializovatelnosti org.jboss.weld.bean.ManagedBean generuje Infinispan desítky výjimek každou vteřinu. Jedná se o výjimky několika typů z nichž všechny mají tu společnou příčinu. To způsobuje nestabilitu a sekání všech serverů v clusteru společně se ztrátou kontextu spravovaných bean. Tento bug již byl reportován [jako WELD-927](https://issues.jboss.org/browse/WELD-927) a na [JBoss fóru](https://community.jboss.org/message/754900). Naše aplikace silně využívá `@ViewScoped` bean, a to je hlavní příčina toho, proč ji není možné nasadit do clusteru.
 
 
 ## Poznámky a zajímavosti
@@ -132,4 +141,5 @@ Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití 
 - [REST API na OpenShift](https://flightsystem-ctu.rhcloud.com/rest/)
 - [WebService na OpenShift](https://flightsystem-ctu.rhcloud.com/ws/update?wsdl)
 - zdrojové kódy dostupné na [GitHubu](https://github.com/KarelCemus/A4M36JEE)
+- poznámka: OpenShift je často velice pomalý, při testování nutná trpělivost nebo např. noční hodiny, kdy je výrazně rychlejší
 
