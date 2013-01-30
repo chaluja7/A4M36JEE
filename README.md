@@ -17,10 +17,10 @@ Pro předmět A4M36JEE byl realizován jednoduchý systém pro správu letů a o
 ## Ostatní požadavky
 
 - bezpečnost systému rozlišuje čtyři úrovně oprávnění
-- běžný uživatel - tvorba a správa vlastních rezervací
-- flight manager -  aktualizuje plánované lety
-- admin - plný přístup, vzhledem k roli flight manager smí spravovat destinace
-- webservice - aktualizace plánovaných letů, určeno pro 3. strany a WS API
+ - běžný uživatel - tvorba a správa vlastních rezervací
+ - flight manager -  aktualizuje plánované lety
+ - admin - plný přístup, vzhledem k roli flight manager smí spravovat destinace
+ - webservice - aktualizace plánovaných letů, určeno pro 3. strany a WS API
 - přístup k rezervacím je zabezpečen heslem
 - nasazení produktu na PaaS OpenShift
 - používání CDI místo anotací ze standardu Java EE 5
@@ -94,7 +94,7 @@ Tento produkt není možné spouštět v clusteru kvůli dvěma bugům, které j
 Ačkoliv několik tutoriálů a oficiální dokumentace říkají, že SingleSignOn je ve výchozí konfiguraci JBoss AS 7 zapnuté, tak se nám nepodařilo SSO zprovoznit, což lze snadno ověřit na odkazované aplikaci. Bez předávání aktuálního uživatelova oprávnění nemá smysl nasazovat aplikaci do clusteru, protože by se musel znovu přihlašovat na každý server a mohl by tak ztratit část své práce.
 
 
-Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití CDI rozšíření a jejím převodu na CDI context. Z důvodu neserializovatelnosti org.jboss.weld.bean.ManagedBean generuje Infinispan desítky výjimek každou vteřinu. Jedná se o výjimky několika typů z nichž všechny mají tu společnou příčinu. To způsobuje nestabilitu a sekání všech serverů v clusteru společně se ztrátou kontextu spravovaných bean. Tento bug již byl reportován [jako WELD-927](https://issues.jboss.org/browse/WELD-927) a na [JBoss fóru](https://community.jboss.org/message/754900). Naše aplikace silně využívá `@ViewScoped` bean, a to je hlavní příčina toho, proč ji není možné nasadit do clusteru.
+Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití CDI rozšíření a jejím převodu na CDI context. Z důvodu neserializovatelnosti `org.jboss.weld.bean.ManagedBean` generuje Infinispan desítky výjimek každou vteřinu. Jedná se o výjimky několika typů z nichž všechny mají tu společnou příčinu. To způsobuje nestabilitu a sekání všech serverů v clusteru společně se ztrátou kontextu spravovaných bean. Tento bug již byl reportován [jako WELD-927](https://issues.jboss.org/browse/WELD-927) a na [JBoss fóru](https://community.jboss.org/message/754900). Naše aplikace silně využívá `@ViewScoped` bean, a to je hlavní příčina toho, proč ji není možné nasadit do clusteru.
 
 
 ## Poznámky a zajímavosti
@@ -106,7 +106,7 @@ Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití 
 - RichFaces bean validation
 - MultiPage Messages - JSF FacesMessage přežijí redirect a zobrazí se i pak
 - zapezpečení `@WebService`
-- vlastní řešení bugu Arquillianu pro TestNG @DataProvider (viz níže)
+- vlastní řešení bugu Arquillianu pro TestNG `@DataProvider` (viz níže)
 - TestNG suite pro plné otestování aplikace, testy rozděleny do skupin, spustitelné Mavenem
 - build řízený mavenem, profily pro testování i openshift, parametrizace konfiguračních souborů, např. deployment context pro OpenShift nastavit na /
 - žádná data se z aplikace neodstraňují, používá se atribut “validUntil”
@@ -125,7 +125,7 @@ Závažnějším problémem je nefunkční `@ViewScoped` anotace při použití 
 - přítomnost PrettyFaces na classpath znemožňuje nasazení aplikace do clusteru, způsobují ztrátu session při jejím předávání mezi servery
 - Arquillian nesprávně pracuje s TestNG anotací `@DataProvider`, reprodukováno  a zdokumentováno v projektu [BugReporter](https://github.com/KarelCemus/BugReporter)
 - Arquillian občas padá při spouštění test suite obsahující provázané metody (dependsOn). Problém zdokumentován v projektu BugReporter.
-- Seam má silný coupling, při použití jednoho modulu je potřeba importovat téměř celý projekt pokud se chceme zbavit výjimek ClassNotFound
+- Seam má silný coupling, při použití jednoho modulu je potřeba importovat téměř celý projekt pokud se chceme zbavit výjimek `ClassNotFoundException`
 - RichFaces bean validation někdy umí číst javax.validation anotace z atributů tříd, ale někdy je ignoruje a čte pouze gettery.
 - Arquillian polyká výjimky generované v `@BeforeMethod` atd., neřeší jestli metoda prošla nebo spadla
 - Arquillian spouští inicializační metody `@Before...` a `@After...` dvakrát, jednou na klientovi a jednou na serveru, ale např. `@Inject` se vykonal jen na serveru a práce s takovým atributem na klientu generuje `NullPointerException`
