@@ -32,20 +32,20 @@ Pro předmět A4M36JEE byl realizován jednoduchý systém pro správu letů a o
 
 ### Datový model
 
-![Datový model](A4M36JEE/raw/master/doc/DB.png)
+![Datový model](doc/DB.png)
 
 
 ### Architektura
 
 Architektura aplikace je založena na standardní třívrstvé architektuře JEE aplikací. Business objekty slouží jako datová vrstva, business vrstva se skládá ze @Stateless služeb poskytujících vlastní funkcionalitu podle anti-patternu Transaction script a prezentační vrstva je tvořena 3 klienty, jedním pro každou z technologií JSF, JAX-RS a JAX-WS.
-![Architektura aplikace](A4M36JEE/raw/master/doc/Architecture.png)
+![Architektura aplikace](doc/Architecture.png)
 
 
 ### Diagram nasazení
 
 Diagram nasazení zobrazuje nasazení aplikace na standalone JBoss AS a zachycuje i očekávané připojení klientů. Diagram nasazení by bylo možné rozšířit na nasazení do clusteru přidáním load balanceru v podobě reverzní proxy a více instancí JBoss AS.
 
-![Diagram nasazení](A4M36JEE/raw/master/doc/deployment.png)
+![Diagram nasazení](doc/deployment.png)
 
 
 ## Testování
