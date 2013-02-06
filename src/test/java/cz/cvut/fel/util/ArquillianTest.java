@@ -51,7 +51,7 @@ public class ArquillianTest extends Arquillian {
                             // define the web-service configration and security for client
                     .addAsResource( "jboss-wsse-client.xml", "jboss-wsse-client.xml" )
                             // set security domain description
-                    .addAsWebInfResource( "jboss-web.xml", "jboss-web.xml" )
+                    .addAsWebInfResource( "jboss-web-test.xml", "jboss-web.xml" )
                             // define the unnecessary configuration
                     .addAsWebInfResource( EmptyAsset.INSTANCE, "beans.xml" )
                             // logging configuration
